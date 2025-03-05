@@ -1,4 +1,4 @@
-I like apples
+I like flowers
 I like grapes
 I like strawberry
 I like banana
@@ -6,7 +6,7 @@ I like watermelon
 I like melons
 I like blueberry
 I like you
-I like me
+I like me very much
 I like we
 
 I like this world
