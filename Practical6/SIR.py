@@ -1,48 +1,45 @@
-# impor t n e c e s s a r y l i b r a r i e s
+# import necessary libraries
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 初始化模型参数  
-N = 10000  # 总人口  
-S = N - 1  # 初始易感人数  
-I = 1      # 初始感染人数  
-R = 0      # 初始康复人数  
-beta = 0.3  # 感染率  
-gamma = 0.05  # 恢复率  
+# Define the initial basic variables of the IRS model
+N = 10000 # Population size
+S = N-1 # Number of sceptible people, since only one person is infected at the very beginning
+I = 1 # One person is infected at the very beginning
+R = 0 # Recovered individuals. Nobody has yet recovered.
 
-# 创建数组记录各时间步的S、I、R数量  
-S_array = [S]  
-I_array = [I]  
-R_array = [R]  
+beta = 0.3  # Infection rate
+gamma = 0.05  # Recovery rate
 
-# 模拟1000个时间步  
-for _ in range(1000):  
-    # 计算易感者感染的概率（beta * 感染者比例）  
-    infection_prob = beta * (I / N)  
-    # 计算感染者康复的数量  
-    recover_num = np.random.choice(range(2), I, p=[1 - gamma, gamma]).sum()  
-    # 计算易感者感染的数量  
-    infect_num = np.random.choice(range(2), S, p=[1 - infection_prob, infection_prob]).sum()  
+# Create arrays for each of the variables to track how they evolve overtime.
+S_arr = [S] 
+I_arr = [I]
+R_arr = [R]
 
-    # 更新S、I、R数量  
-    S -= infect_num  
-    I = I + infect_num - recover_num  
-    R += recover_num  
-
-    # 记录结果  
-    S_array.append(S)  
-    I_array.append(I)  
-    R_array.append(R)  
-
-# 绘制结果  
-plt.figure(figsize=(6, 4), dpi=150)  
-plt.plot(S_array, label='Susceptible')  
-plt.plot(I_array, label='Infected')  
-plt.plot(R_array, label='Recovered')  
-plt.xlabel('Time Step')  
-plt.ylabel('Number of People')  
-plt.title('SIR Model Simulation')  
-plt.legend()  
-plt.show()  
-# 若需保存图片，取消注释下一行并指定路径  
-# plt.savefig('sir_model.png', type='png')  
+# Time loop: 
+# Calculate the probility of infection
+# Randomly choose individuals to become infected
+# Randomly choose individuals to recover
+# Update the number of individuals in each variable
+# Record each state in the arrays by adding the updated data using "append"
+for t in range(1000):
+    p_infection = beta*(I_arr[-1]/N)
+# Randomly choose individuals to become infected
+    new_infected = np.random.choice([0, 1], S_arr[-1], p=[1 - p_infection, p_infection]).sum() 
+# Randomly choose individuals to recover
+    new_recovered = np.random.choice([0, 1], I_arr[-1], p=[1 - gamma, gamma]).sum()   
+ # Record the current updated state by adding data to the array
+    S_arr.append(S_arr[-1]-new_infected)
+    I_arr.append(I_arr[-1]+new_infected-new_recovered)
+    R_arr.append(R_arr[-1]+new_recovered)
+    plt.plot(S_arr, label='Susceptible Individuals')
+# Draw and disply the result
+plt.figure(figsize=(6, 4), dpi=200)
+plt.plot(S_arr, label='Susceptible Individuals')
+plt.plot(I_arr, label='Infected Individuals')
+plt.plot(R_arr, label='Recovered Individuals')
+plt.xlabel('Time')
+plt.ylabel('Number of Individuals')
+plt.title('SIR Model')
+plt.legend()
+plt.show()
