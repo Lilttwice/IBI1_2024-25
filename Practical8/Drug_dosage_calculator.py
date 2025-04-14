@@ -11,7 +11,11 @@ def calculate_paracetamol_volume(weight, strength):
         volume = (required_dose / 250) * 5
     return volume
 
+<<<<<<< HEAD
 # 函数调用示例
+=======
+# example
+>>>>>>> 011200d521de4c230ad6dbcdb2b34c65d17d1d56
 try:
     volume = calculate_paracetamol_volume(30, 120)
     print(f"The required volume of paracetamol is {volume} ml")

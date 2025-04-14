@@ -9,7 +9,11 @@ def find_restriction_sites(dna_sequence, enzyme_sequence):
             sites.append(i)
     return sites
 
+<<<<<<< HEAD
 # 函数调用示例
+=======
+# example
+>>>>>>> 011200d521de4c230ad6dbcdb2b34c65d17d1d56
 try:
     dna = "ACGTACGT"
     enzyme = "ACGT"

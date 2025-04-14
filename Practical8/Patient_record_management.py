@@ -8,6 +8,10 @@ class patients:
     def print_details(self):
         print(f"Patient Name: {self.patient_name}, Age: {self.age}, Date of Latest Admission: {self.date_of_latest_admission}, Medical History: {self.medical_history}")
 
+<<<<<<< HEAD
 # 类使用示例
+=======
+# example
+>>>>>>> 011200d521de4c230ad6dbcdb2b34c65d17d1d56
 patient1 = patients("John Doe", 30, "2025-01-01", "Some medical history details")
 patient1.print_details()
