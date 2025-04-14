@@ -1,4 +1,0 @@
-Hello, my name is Lilttwice.
-I like sleeping and sweating.
-I am enjoying listening to music. 
-Rob is happy that he can push his repo from Visual Studio Code to GitHub. So am I.
