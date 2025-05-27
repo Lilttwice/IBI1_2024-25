@@ -1,0 +1,6 @@
+File for reflection in IBI1_2024-25.
+
+During this course, I have learnt version control, how to navigate Unix-like systems and how to write simple programs in Python.
+The logic of local and remote repository is clear and interesting, connecting myself with a lot other githubers.
+I have also learnt to write careful instructions when communicating online! Using the website CSDN and copilot, I anm looking forward to my coding journey.
+However, remembering commands like log\pwd\ls\... was hard initially. I wonder if excellent programmers have talented memory.
