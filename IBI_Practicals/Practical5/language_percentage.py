@@ -13,7 +13,17 @@ language_data = {
     "TypeScript": 38.5
     }
 
-print(language_data)
+# Variable to select a specific language (can be modified)
+selected_language = "Python"  # Modify this to check different languages
+
+# Retrieve popularity of the selected language
+popularity = language_data.get(selected_language, "Language not found")
+
+# Print the result
+if isinstance(popularity, float):
+    print(f"The popularity of {selected_language} is {popularity}%")
+else:
+    print(popularity)
 
 # draw a bar chart to show the usage percentage of programming languages
 # x-axis: programming languages
