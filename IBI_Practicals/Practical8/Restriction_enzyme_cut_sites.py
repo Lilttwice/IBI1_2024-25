@@ -8,7 +8,24 @@ def recognition(dna, enzyme):  # Define a function to find the position of the e
             return(pos)  # Return the position of the match
     return("Not found")  # Return "Not found" if no match is found
 
-def check(seq):  # Define a function to validate the sequence
+def check(seq):  # Define a function to validate the DNA and enzyme sequences
+    """Check if the sequence contains only valid nucleotides."""
+    seq = seq.upper()  # Convert the sequence to uppercase for uniformity
+    if len(seq) == 0:  # Check if the sequence is empty
+        return(False)  # Return False if the sequence is empty
+    if len(seq) > 1000:  # Check if the sequence is too long
+        return(False)  # Return False if the sequence exceeds 1000 characters
+    if len(seq) < 4:  # Check if the sequence is too short  
+        return(False)
+    # Return False if the sequence is less than 4 characters
+    if seq.count("N") > 0:  # Check if the sequence contains any 'N' characters
+        return(False)
+    # Return False if 'N' is found, which indicates an unknown nucleotide
+    if seq.count(" ") > 0:  # Check if the sequence contains any spaces
+        return(False)
+    # Return False if spaces are found, which are not valid in nucleotide sequences
+    if seq.count("\n") > 0:  # Check if the sequence contains any newline characters
+        return(False)           
     for i in range(len(seq)):  # Loop through each character in the sequence
         if not seq[i] in ["A", "G", "C", "T"]:  # Check if the character is not a valid nucleotide
             return(False)  # Return False if an invalid character is found
