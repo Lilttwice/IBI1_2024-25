@@ -30,6 +30,9 @@ medical_history = input("What's the patient's medical history: ")
 
 patient = Patient(name, age, latest_admission, medical_history)
 patient.print_patient()
-# try an example
-patient1 = patient("John Doe", 30, "2025-01-01", "Some medical history details")
-patient1.print_details() 
+
+#Enter patient name: Alice
+#Enter patient age (integer): 35
+#Enter latest admission date (e.g., 2025-05-28): 2025-05-20
+#Enter medical history: Allergic rhinitis
+#Name: Alice, Age: 35, Last Admission: 2025-05-20, History: Allergic rhinitis
