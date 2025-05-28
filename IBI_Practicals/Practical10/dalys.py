@@ -199,67 +199,52 @@ print(dalys_data.loc[:,"Year"])
 #6839    2019
 #Name: Year, Length: 6840, dtype: int64
 
-2. How can you create a Boolean that is True when the “Year” is “1990”, but false otherwise? (Recall from lecture 4.2 how to check whether something is equal to something
-else)
-print(dalys_data.Year==1990)
-# which rows have the year 1990, you can do this:
-# dalys_data.Year == 1990
-# This will give you a list of Booleans, one for each row in the dataframe. If the year is 1990, the value will be True, otherwise it will be False. You can check this by running
- 
+# Use Boolean to show DALYs for all countries in 1990
+daly_1990 = dalys_data.loc[dalys_data["Year"] == 1990, "DALYs"]
+print("\nDALYs for all countries in 1990:")
+print(daly_1990)
 
-3. How do you use that Boolean to find exactly the rows you need in your dataframe?
-You have now completed the most difficult part of the practical!
-5 Examining the situation across countries
-• Now, you can use your new superpower of retrieving values from dataframes to answer a few
-interesting questions. For instance, is the mean DALYs value for the UK similar to that of
-a similar-sized country? Here, we will compare the mean DALYs for the UK and France.
-Which is largest?
-Here, we are interested in only the parts of dalys_data where the Entity is “United Kingdom”
-and “France”, and in two columns “Entity” and “DALYs”. When you read out specific rows
-and columns and intend to use them for several different things, it is sometimes useful to
-save them as separate objects. For instance, I made an object called uk to store only the
-data from the United Kingdom. This is not necessary, but can make your code easier to read
-(and easier to fix if it doesn’t work!).
-Note the “Entity” for the UK is ’United Kingdom’ and the “Code” is GBR (Great Britain).
-uk = dalys_data.loc[dalys_data.Entity=="United Kingdom", ["DALYs", "Year"]]
-• Let’s plot the data for the UK over time. This may look a little bit different for you, depending
-on whether you also made objects like that and what you called them. But you should be
-able to edit the following function as needed:
-plt.plot(uk.Year, uk.DALYs, 'b+')
+# Compute mean DALYs for UK and France
+uk_data = dalys_data.loc[dalys_data["Entity"] == "United Kingdom", ["DALYs", "Year"]]
+france_data = dalys_data.loc[dalys_data["Entity"] == "France", ["DALYs", "Year"]]
+uk_mean = uk_data["DALYs"].mean()
+france_mean = france_data["DALYs"].mean()
+print(f"\nMean DALYs for UK: {uk_mean:.2f}")
+print(f"Mean DALYs for France: {france_mean:.2f}")
+# Comment: Compare means
+if uk_mean > france_mean:
+    print("# Mean DALYs in the UK is greater than in France.")
+else:
+    print("# Mean DALYs in the UK is smaller than or equal to France.")
 
+# Plot DALYs over time for the UK
+plt.figure(figsize=(10, 6))
+plt.plot(uk_data["Year"], uk_data["DALYs"], 'b*', label="UK DALYs")
+plt.xticks(uk_data["Year"], rotation=-90)
+plt.xlabel("Year")
+plt.ylabel("DALYs (Disability-Adjusted Life Years)")
+plt.title("DALYs in the United Kingdom Over Time")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("uk_dalys_plot.png")  # Save plot
+plt.show()
 
-4
-What does 'b+' do? Change it to something different, e.g. 'r+' or 'bo' and see what
-happens. Make a hypothesis of what other command might work here and test it!
-• I also use the following command to make my plot nicer (note it is referring to the above
-subset of data summarising the whole world):
-plt.xticks(uk.Year,rotation=-90)
-Why? What does it do? Change some of the numbers and see what happens if you are unsure.
-
-
-6 Asking one other question
-• Now you have all the tools you need to draw interesting graphs from other parts of these
-data. This allows you to answer specific questions.
-Ask one question that can be answered using this dataset and a plot or some simple summary
-statistics. Make a text file called question.txt where you (briefly!) state the question. In the
-same .txt file, also provide the line number for where in your main python file the code to
-answer your question starts, and briefly discuss the result (e.g. is it what you expected, can
-you explain reasons for why the data might look the way it does?)
-You are completely free to pursue any question that interests you. But if you feel uninspired,
-pick one of the following suggestions:
-– How has the DALYs changed in one or more countries over time?
-– How has the relationship between the DALYs in China and the UK changed over time?
-Are they becoming more similar, less similar?
-– What country or countries have recorded a DALYs greater than 650,000 in a single year?
-– Plot a boxplot of DALYs across countries in 1990.
-– . . .
-
-
-
-
-
-
-
-
-
-
+# Answer a custom question (Line 66 starts this section)
+# Question: How have DALYs in China changed along time compared to the UK?
+china_data = dalys_data.loc[dalys_data["Entity"] == "China", ["DALYs", "Year"]]
+plt.figure(figsize=(10, 6))
+plt.plot(china_data["Year"], china_data["DALYs"], 'r+', label="China DALYs")
+plt.plot(uk_data["Year"], uk_data["DALYs"], 'b*', label="UK DALYs")
+plt.xticks(china_data["Year"], rotation=-90)
+plt.xlabel("Year")
+plt.ylabel("DALYs (Disability-Adjusted Life Years)")
+plt.title("DALYs in China vs. UK Over Time")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("china_uk_dalys_plot.png")  # Save plot
+plt.show()
+# Summary statistics for discussion in question.txt
+china_mean = china_data["DALYs"].mean()
+print(f"Mean DALYs for China: {china_mean:.2f}")

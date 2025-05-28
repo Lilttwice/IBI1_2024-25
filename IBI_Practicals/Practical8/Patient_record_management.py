@@ -1,14 +1,35 @@
-# use "class" to define variables for Patient Record Management System
-class patients:
-    def __init__(self, patient_name, age, date_of_latest_admission, medical_history):
-        self.patient_name = patient_name
+# Patient Record Management System
+class Patient:
+    def __init__(self, name: str, age: int, latest_admission: str, medical_history: str):
+        self.name = name
         self.age = age
-        self.date_of_latest_admission = date_of_latest_admission
+        self.latest_admission = latest_admission
         self.medical_history = medical_history
+    
+    def print_patient(self) -> None:
+        print(f"Name: {self.name} Age: {self.age} Latest date of admission: {self.latest_admission} Medical history: {self.medical_history}")
 
-    def print_details(self):
-        print(f"Patient Name: {self.patient_name}, Age: {self.age}, Date of Latest Admission: {self.date_of_latest_admission}, Medical History: {self.medical_history}")
+# input name
+name = input("What's the patient's name: ")
 
+# input age， with validation
+while True:
+    age_input = input("What's the patient's age: ")
+    if age_input.strip():  # check if input is not empty
+        # try to convert input to integer
+        try:
+            age = int(age_input)  # transfer input to integer
+            break  # valid input, exit loop
+        except ValueError:
+            print("Invalid input. Please enter an integer for age.")  # prompt invalid input（noninteger）
+    else:
+        print("Age cannot be empty. Try again.")  # prompt empty input
+
+latest_admission = input("What's the latest date for the patient to admit: ")
+medical_history = input("What's the patient's medical history: ")
+
+patient = Patient(name, age, latest_admission, medical_history)
+patient.print_patient()
 # try an example
-patient1 = patients("John Doe", 30, "2025-01-01", "Some medical history details")
-patient1.print_details()
+patient1 = patient("John Doe", 30, "2025-01-01", "Some medical history details")
+patient1.print_details() 
